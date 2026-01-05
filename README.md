@@ -1,5 +1,5 @@
 # luacrc32c
-`luacec32c` is a Lua wrapper for Google's CRC-32C implementation available at https://github.com/google/crc32c. CRC-32C is also known as: 
+`luacrc32c` is a Lua wrapper for Google's CRC-32C implementation available at https://github.com/google/crc32c. CRC-32C is also known as: 
 
 - CRC-32/ISCSI
 - CRC-32/BASE91-C
@@ -15,7 +15,7 @@ Notes:
 
 ## API
 
-`luacec32c` API comprises two functions, which mimic the underlying `crc32c.lib` interface. In addition, the wrapper version can be queried. Note that positive or negative integer numbers are always processed in **little-endian** order.
+`luacrc32c` API comprises two functions, which mimic the underlying `crc32c.lib` interface. In addition, the wrapper version can be queried. Note that positive or negative integer numbers are always processed in **little-endian** order.
 
 ### luacrc32c.value()
 
@@ -133,4 +133,4 @@ nil     Table value exceeds selected 2 byte elemSize.
 
 ## License
 
-MIT
+See https://github.com/OneLuaPro/luacrc32c/blob/master/LICENSE.txt.
