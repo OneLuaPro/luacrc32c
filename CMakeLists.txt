@@ -1,3 +1,25 @@
+# MIT License
+#
+# Copyright (c) 2026 Kritzel Kratzel for OneLuaPro.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the "Software"), to deal in
+# the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+# the Software, and to permit persons to whom the Software is furnished to do so,
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
 # ------------------------------------------------------------------------------
 # CMake for luacrc32c
 # ------------------------------------------------------------------------------
@@ -45,11 +67,8 @@ endif()
 if(NOT CMAKE_INSTALL_PREFIX)
   set(CMAKE_INSTALL_PREFIX ${LIBLUA_INSTALLDIR})
 endif()
-
 # Find lib
-# find_package(crc32c)
-
-
+find_package(crc32c REQUIRED HINTS ${LUA_HINTS})
 
 # ------------------------------------------------------------------------------
 # Project defintion
@@ -99,9 +118,10 @@ add_library(luacrc32c SHARED)
 target_include_directories(luacrc32c PRIVATE ${LIBLUA_INCLUDEDIR})
 # setup platform-specific sources, compile and linker options
 if(WIN32 AND NOT MinGW)
-  add_definitions(-DLUA_BUILD_AS_DLL -DLUA_LIB)
-  target_compile_options(luacrc32c PRIVATE /D_WINDLL /D_WIN32 /D_CRT_SECURE_NO_WARNINGS)
-  target_link_options(luacrc32c PRIVATE /LIBPATH:${LIBLUA_LIBDIR} liblua.lib crc32c.lib)
+  target_compile_definitions(luacrc32c PRIVATE
+    LUA_BUILD_AS_DLL LUA_LIB _WINDLL _WIN32 _CRT_SECURE_NO_WARNINGS)
+  target_link_directories(luacrc32c PRIVATE ${LIBLUA_LIBDIR})
+  target_link_libraries(luacrc32c PRIVATE liblua.lib crc32c.lib)
 else()
   message(FATAL_ERROR "Not yet fully implemented.")
 endif()

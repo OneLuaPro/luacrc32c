@@ -38,6 +38,7 @@
 #include <lauxlib.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include <crc32c/crc32c.h>
 
 #define LUACRC32C_VERSION "luacrc32c 1.0"
