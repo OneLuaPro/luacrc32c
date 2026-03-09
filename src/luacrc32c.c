@@ -41,7 +41,7 @@
 #include <string.h>
 #include <crc32c/crc32c.h>
 
-#define LUACRC32C_VERSION "luacrc32c 1.0"
+#define LUACRC32C_VERSION "luacrc32c 1.0.1"
 
 static inline uint16_t htole16(uint16_t x) {
 #if defined(_WIN32)
